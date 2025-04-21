@@ -9,7 +9,7 @@ import static primitives.Util.*;
 /**
  * Polygon class represents two-dimensional polygon in 3D Cartesian coordinate
  * system
- * @author Maor Atari
+ * @author Dan
  */
 public class Polygon extends Geometry {
     /** List of polygon's vertices */
