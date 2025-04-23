@@ -36,6 +36,7 @@ public class Vector extends Point {
      * @return new vector resulting from the addition
      */
     public Vector add(Vector other) {
+
         return new Vector(xyz.add(other.xyz));
     }
 
@@ -45,6 +46,7 @@ public class Vector extends Point {
      * @return new scaled vector
      */
     public Vector scale(double scalar) {
+
         return new Vector(xyz.scale(scalar));
     }
 

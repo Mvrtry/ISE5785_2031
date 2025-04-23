@@ -43,6 +43,15 @@ public class Point {
     }
 
     /**
+     * Adds a vector to this point
+     * @param vector the vector to add
+     * @return new point after adding the vector
+     */
+    public Point add(Vector vector) {
+        return new Point(xyz.add(vector.xyz));
+    }
+
+    /**
      * Subtracts another point from this point
      * @param other the other point to subtract
      * @return vector from other point to this point
@@ -51,14 +60,14 @@ public class Point {
         return new Vector(xyz.subtract(other.xyz));
     }
 
+
     /**
-     * Adds a vector to this point
-     * @param vector the vector to add
-     * @return new point after adding the vector
+     * הערה שלי:
+     * מרחק מרובע - (distanceSquared) מחושב לפני מרחק רגיל מטעמי יעילות:
+     *   1. חוסך פעולת שורש כפולה (שורש ואז חזקה)
+     *   2. מאפשר השוואת מרחקים ללא חישוב שורש מיותר
+     *  המרחק הרגיל משתמש בתוצאת המרחק המרובע כדי למנוע כפילות חישובים
      */
-    public Point add(Vector vector) {
-        return new Point(xyz.add(vector.xyz));
-    }
 
     /**
      * Calculates the squared distance between this point and another point
@@ -80,4 +89,6 @@ public class Point {
     public double distance(Point other) {
         return Math.sqrt(distanceSquared(other));
     }
+
+
 }

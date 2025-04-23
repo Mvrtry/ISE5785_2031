@@ -1,15 +1,14 @@
 package geometries;
 
-import primitives.*;
-
+import static java.lang.Double.*;
 import java.util.List;
-
 import static primitives.Util.*;
+import primitives.*;
 
 /**
  * Polygon class represents two-dimensional polygon in 3D Cartesian coordinate
  * system
- * @author Maor Atari
+ * @author Dan
  */
 public class Polygon extends Geometry {
     /** List of polygon's vertices */
