@@ -87,6 +87,7 @@ public class Vector extends Point {
      * @return squared length of the vector
      */
     public double lengthSquared() {
+
         return dotProduct(this);
     }
 
@@ -95,6 +96,7 @@ public class Vector extends Point {
      * @return length of the vector
      */
     public double length() {
+
         return Math.sqrt(lengthSquared());
     }
 
