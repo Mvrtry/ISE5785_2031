@@ -6,16 +6,22 @@ import primitives.Vector;
 /**
  * Class Plane is the basic class representing a plane in Cartesian
  * 3-Dimensional coordinate system.
+ *
  * @author Maor Atari
  */
 public class Plane extends Geometry {
-    /** A point on the plane */
+    /**
+     * A point on the plane
+     */
     private final Point q0;
-    /** The normal vector to the plane */
+    /**
+     * The normal vector to the plane
+     */
     private final Vector normal;
 
     /**
      * Constructor to initialize Plane based on three points
+     *
      * @param p1 first point
      * @param p2 second point
      * @param p3 third point
@@ -29,7 +35,8 @@ public class Plane extends Geometry {
 
     /**
      * Constructor to initialize Plane based on a point and normal vector
-     * @param q0 point on the plane
+     *
+     * @param q0     point on the plane
      * @param normal normal vector to the plane (will be normalized)
      */
     public Plane(Point q0, Vector normal) {

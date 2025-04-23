@@ -9,17 +9,21 @@ import static primitives.Util.*;
 /**
  * Class Cylinder is the basic class representing a cylinder in Cartesian
  * 3-Dimensional coordinate system.
+ *
  * @author Maor Atari
  */
 public class Cylinder extends Tube {
-    /** The height of the cylinder */
+    /**
+     * The height of the cylinder
+     */
     private final double height;
 
     /**
      * Constructor to initialize Cylinder with axis ray, radius and height
+     *
      * @param axisRay the axis ray
-     * @param radius the radius value
-     * @param height the height value
+     * @param radius  the radius value
+     * @param height  the height value
      */
     public Cylinder(Ray axisRay, double radius, double height) {
         super(axisRay, radius);

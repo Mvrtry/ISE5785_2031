@@ -3,17 +3,23 @@ package primitives;
 /**
  * Class Point is the basic class representing a point of Euclidean geometry in Cartesian
  * 3-Dimensional coordinate system.
+ *
  * @author Maor Atari
  */
 public class Point {
-    /** Zero point (0,0,0) */
+    /**
+     * Zero point (0,0,0)
+     */
     public static final Point ZERO = new Point(0, 0, 0);
 
-    /** The coordinates of the point */
+    /**
+     * The coordinates of the point
+     */
     protected final Double3 xyz;
 
     /**
      * Constructor to initialize Point based on three coordinate values
+     *
      * @param x first coordinate value
      * @param y second coordinate value
      * @param z third coordinate value
@@ -24,6 +30,7 @@ public class Point {
 
     /**
      * Constructor to initialize Point based on Double3 object
+     *
      * @param xyz Double3 object containing all three coordinates
      */
     public Point(Double3 xyz) {
@@ -44,6 +51,7 @@ public class Point {
 
     /**
      * Adds a vector to this point
+     *
      * @param vector the vector to add
      * @return new point after adding the vector
      */
@@ -53,6 +61,7 @@ public class Point {
 
     /**
      * Subtracts another point from this point
+     *
      * @param other the other point to subtract
      * @return vector from other point to this point
      */
@@ -71,6 +80,7 @@ public class Point {
 
     /**
      * Calculates the squared distance between this point and another point
+     *
      * @param other the other point
      * @return squared distance between the points
      */
@@ -83,6 +93,7 @@ public class Point {
 
     /**
      * Calculates the distance between this point and another point
+     *
      * @param other the other point
      * @return distance between the points
      */

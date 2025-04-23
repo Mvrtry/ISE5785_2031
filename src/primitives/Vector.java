@@ -3,11 +3,13 @@ package primitives;
 /**
  * Class Vector is the basic class representing a vector of Euclidean geometry in Cartesian
  * 3-Dimensional coordinate system.
+ *
  * @author Maor Atari
  */
 public class Vector extends Point {
     /**
      * Constructor to initialize Vector based on three coordinate values
+     *
      * @param x first coordinate value
      * @param y second coordinate value
      * @param z third coordinate value
@@ -21,6 +23,7 @@ public class Vector extends Point {
 
     /**
      * Constructor to initialize Vector based on Double3 object
+     *
      * @param xyz Double3 object containing all three coordinates
      * @throws IllegalArgumentException if the vector is zero
      */
@@ -32,6 +35,7 @@ public class Vector extends Point {
 
     /**
      * Adds another vector to this vector
+     *
      * @param other the other vector to add
      * @return new vector resulting from the addition
      */
@@ -42,6 +46,7 @@ public class Vector extends Point {
 
     /**
      * Scales this vector by a scalar value
+     *
      * @param scalar the scalar value
      * @return new scaled vector
      */
@@ -52,6 +57,7 @@ public class Vector extends Point {
 
     /**
      * Calculates the dot product with another vector
+     *
      * @param other the other vector
      * @return dot product value
      */
@@ -63,6 +69,7 @@ public class Vector extends Point {
 
     /**
      * Calculates the cross product with another vector
+     *
      * @param other the other vector
      * @return new vector resulting from the cross product
      */
@@ -84,6 +91,7 @@ public class Vector extends Point {
 
     /**
      * Calculates the squared length of the vector
+     *
      * @return squared length of the vector
      */
     public double lengthSquared() {
@@ -93,6 +101,7 @@ public class Vector extends Point {
 
     /**
      * Calculates the length of the vector
+     *
      * @return length of the vector
      */
     public double length() {
@@ -102,6 +111,7 @@ public class Vector extends Point {
 
     /**
      * Normalizes this vector (returns a new vector in the same direction with length 1)
+     *
      * @return new normalized vector
      */
     public Vector normalize() {
