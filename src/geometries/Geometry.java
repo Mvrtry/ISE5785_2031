@@ -10,6 +10,13 @@ import primitives.Vector;
  * @author Maor Atari
  */
 public abstract class Geometry {
+
+    /**
+     * Default constructor for Geometry.
+     */
+    public Geometry() {
+    }
+
     /**
      * Returns the normal vector to the geometry at a given point
      *

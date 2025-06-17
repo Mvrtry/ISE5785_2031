@@ -11,6 +11,13 @@ import static primitives.Util.isZero;
  * @author Dan Zilberstein
  */
 public final class Main {
+
+    /**
+     * Default constructor for Main.
+     */
+    public Main() {
+    }
+
     /**
      * A point for tests at (1,2,3)
      */
