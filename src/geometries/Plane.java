@@ -21,16 +21,17 @@ public class Plane extends Geometry {
 
     /**
      * Constructor to initialize Plane based on three points
+     * Note: This is a partial implementation for Stage 1.
+     * The normal calculation will be fully implemented in the next stage.
      *
-     * @param p1 first point
-     * @param p2 second point
-     * @param p3 third point
+     * @param p1 first point on the plane
+     * @param p2 second point on the plane
+     * @param p3 third point on the plane
+     * @throws IllegalArgumentException if any two points are the same or if all three points are collinear
      */
     public Plane(Point p1, Point p2, Point p3) {
         q0 = p1;
-        Vector v1 = p2.subtract(p1);
-        Vector v2 = p3.subtract(p1);
-        normal = v1.crossProduct(v2).normalize();
+        normal = null;
     }
 
     /**

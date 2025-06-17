@@ -26,4 +26,17 @@ public class Ray {
         this.p0 = p0;
         this.dir = dir.normalize();
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        return (obj instanceof Ray other)
+                && this.p0.equals(other.p0)
+                && this.dir.equals(other.dir);
+    }
+
+    @Override
+    public String toString() {
+        return "Ray{" + "p0=" + p0 + ", dir=" + dir + '}';
+    }
 }

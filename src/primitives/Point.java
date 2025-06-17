@@ -46,7 +46,7 @@ public class Point {
 
     @Override
     public String toString() {
-        return xyz.toString();
+        return "" + xyz;
     }
 
     /**
@@ -69,15 +69,6 @@ public class Point {
         return new Vector(xyz.subtract(other.xyz));
     }
 
-
-    /**
-     * הערה שלי:
-     * מרחק מרובע - (distanceSquared) מחושב לפני מרחק רגיל מטעמי יעילות:
-     *   1. חוסך פעולת שורש כפולה (שורש ואז חזקה)
-     *   2. מאפשר השוואת מרחקים ללא חישוב שורש מיותר
-     *  המרחק הרגיל משתמש בתוצאת המרחק המרובע כדי למנוע כפילות חישובים
-     */
-
     /**
      * Calculates the squared distance between this point and another point
      *
@@ -85,10 +76,8 @@ public class Point {
      * @return squared distance between the points
      */
     public double distanceSquared(Point other) {
-        double dx = xyz.d1() - other.xyz.d1();
-        double dy = xyz.d2() - other.xyz.d2();
-        double dz = xyz.d3() - other.xyz.d3();
-        return dx * dx + dy * dy + dz * dz;
+        Double3 diff = xyz.subtract(other.xyz);
+        return diff.d1() * diff.d1() + diff.d2() * diff.d2() + diff.d3() * diff.d3();
     }
 
     /**
@@ -100,6 +89,4 @@ public class Point {
     public double distance(Point other) {
         return Math.sqrt(distanceSquared(other));
     }
-
-
 }

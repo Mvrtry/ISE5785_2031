@@ -21,7 +21,7 @@ public abstract class RadialGeometry extends Geometry {
      *
      * @param radius the radius value
      */
-    public RadialGeometry(double radius) {
+    protected RadialGeometry(double radius) {
         this.radius = radius;
         this.radiusSquared = radius * radius;
     }
