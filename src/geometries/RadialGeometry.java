@@ -1,7 +1,5 @@
 package geometries;
 
-import primitives.Point;
-
 /**
  * Abstract class RadialGeometry is the basic class representing radial geometries
  * (geometries with radius) in Cartesian 3-Dimensional coordinate system.
