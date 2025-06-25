@@ -6,7 +6,8 @@ import primitives.Vector;
 
 import java.util.List;
 
-import static primitives.Util.*;
+import static primitives.Util.alignZero;
+import static primitives.Util.isZero;
 
 /**
  * Class Plane is the basic class representing a plane in Cartesian
@@ -19,10 +20,22 @@ public class Plane extends Geometry {
      * A point on the plane
      */
     private final Point q0;
+
     /**
      * The normal vector to the plane
      */
     private final Vector normal;
+
+    /**
+     * Constructor to initialize Plane with a point and a normal vector
+     *
+     * @param q0     a point on the plane
+     * @param normal the normal vector (will be normalized)
+     */
+    public Plane(Point q0, Vector normal) {
+        this.q0 = q0;
+        this.normal = normal.normalize();
+    }
 
     /**
      * Constructor to initialize Plane based on three points
@@ -30,29 +43,33 @@ public class Plane extends Geometry {
      * @param p1 first point
      * @param p2 second point
      * @param p3 third point
-     * @throws IllegalArgumentException if points are identical or collinear
+     * @throws IllegalArgumentException if the points are on the same line
      */
     public Plane(Point p1, Point p2, Point p3) {
-        q0 = p1;
+        this.q0 = p1; // Use first point as reference point
 
-        try {
-            Vector v1 = p2.subtract(p1);
-            Vector v2 = p3.subtract(p1);
-            normal = v1.crossProduct(v2).normalize();
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Points cannot be identical or collinear");
-        }
+        Vector v1 = p2.subtract(p1);
+        Vector v2 = p3.subtract(p1);
+
+        this.normal = v1.crossProduct(v2).normalize();
     }
 
     /**
-     * Constructor to initialize Plane based on a point and normal vector
+     * Getter for the reference point
      *
-     * @param q0     point on the plane
-     * @param normal normal vector to the plane (will be normalized)
+     * @return the reference point of the plane
      */
-    public Plane(Point q0, Vector normal) {
-        this.q0 = q0;
-        this.normal = normal.normalize();
+    public Point getQ0() {
+        return q0;
+    }
+
+    /**
+     * Getter for the normal vector
+     *
+     * @return the normal vector
+     */
+    public Vector getNormal() {
+        return normal;
     }
 
     @Override
@@ -61,7 +78,7 @@ public class Plane extends Geometry {
     }
 
     @Override
-    public List<Point> findIntersection(Ray ray) {
+    public List<Point> findIntersections(Ray ray) {
         return null;
     }
 }
