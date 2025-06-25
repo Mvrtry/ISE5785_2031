@@ -4,6 +4,8 @@ import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
 
+import java.util.List;
+
 import static primitives.Util.isZero;
 
 /**
@@ -51,5 +53,10 @@ public class Cylinder extends Tube {
 
         // Point is on the curved surface - use parent class implementation
         return super.getNormal(point);
+    }
+
+    @Override
+    public List<Point> findIntersections(Ray ray) {
+        return null;
     }
 }

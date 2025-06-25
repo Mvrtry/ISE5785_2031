@@ -1,15 +1,18 @@
 package geometries;
 
 import primitives.Point;
+import primitives.Ray;
 import primitives.Vector;
+
+import java.util.List;
 
 /**
  * Abstract class Geometry is the basic class representing any geometry in Cartesian
- * 3-Dimensional coordinate system.
+ * 3-Dimensional coordinate system. Implements Intersectable interface.
  *
  * @author Maor Atari
  */
-public abstract class Geometry {
+public abstract class Geometry implements Intersectable {
 
     /**
      * Default constructor for Geometry.

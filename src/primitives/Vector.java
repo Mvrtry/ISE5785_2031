@@ -53,7 +53,7 @@ public class Vector extends Point {
     public Vector add(Vector other) {
         return new Vector(xyz.add(other.xyz));
     }
-    
+
     /**
      * Subtracts another vector from this vector
      *

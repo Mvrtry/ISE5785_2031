@@ -1,5 +1,7 @@
 package primitives;
 
+import static primitives.Util.isZero;
+
 /**
  * Class Ray is the basic class representing a ray (half-infinite line) of Euclidean geometry in Cartesian
  * 3-Dimensional coordinate system.
@@ -43,6 +45,19 @@ public class Ray {
      */
     public Vector getDir() {
         return dir;
+    }
+
+    /**
+     * Calculates a point on the ray at a given distance from the starting point
+     *
+     * @param t the distance from the starting point (can be negative)
+     * @return the point on the ray at distance t from p0
+     */
+    public Point getPoint(double t) {
+        if (isZero(t)) {
+            return p0;
+        }
+        return p0.add(dir.scale(t));
     }
 
     @Override
