@@ -14,6 +14,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 class SphereTests {
     /**
+     * Default constructor for SphereTests
+     */
+    public SphereTests() {
+    }
+
+    /**
      * Delta value for accuracy when comparing the numbers of type 'double' in
      * assertEquals
      */

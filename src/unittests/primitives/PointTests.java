@@ -13,6 +13,12 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class PointTests {
     /**
+     * Default constructor for PointTests
+     */
+    public PointTests() {
+    }
+
+    /**
      * Delta value for accuracy when comparing the numbers of type 'double' in
      * assertEquals
      */

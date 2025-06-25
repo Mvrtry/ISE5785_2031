@@ -15,6 +15,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 class CylinderTests {
     /**
+     * Default constructor for CylinderTests
+     */
+    public CylinderTests() {
+    }
+
+    /**
      * Delta value for accuracy when comparing the numbers of type 'double' in
      * assertEquals
      */

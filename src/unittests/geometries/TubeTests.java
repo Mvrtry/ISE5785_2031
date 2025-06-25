@@ -15,6 +15,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 class TubeTests {
     /**
+     * Default constructor for TubeTests
+     */
+    public TubeTests() {
+    }
+
+    /**
      * Delta value for accuracy when comparing the numbers of type 'double' in
      * assertEquals
      */
