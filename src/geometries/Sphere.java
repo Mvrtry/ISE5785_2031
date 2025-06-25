@@ -6,6 +6,8 @@ import primitives.Vector;
 
 import java.util.List;
 
+import static primitives.Util.alignZero;
+
 /**
  * Class Sphere is the basic class representing a sphere in Cartesian
  * 3-Dimensional coordinate system.
@@ -37,6 +39,47 @@ public class Sphere extends RadialGeometry {
 
     @Override
     public List<Point> findIntersections(Ray ray) {
+        Point p0 = ray.getP0();
+        Vector v = ray.getDir();
+
+        // If ray starts at sphere center
+        if (p0.equals(center)) {
+            Point p = ray.getPoint(radius);
+            return List.of(p);
+        }
+
+        Vector u = center.subtract(p0);
+        double tm = alignZero(v.dotProduct(u));
+        double d = alignZero(Math.sqrt(u.lengthSquared() - tm * tm));
+
+        // No intersections: the ray's line is outside the sphere
+        if (d >= radius) {
+            return null;
+        }
+
+        double th = alignZero(Math.sqrt(radius * radius - d * d));
+        double t1 = alignZero(tm - th);
+        double t2 = alignZero(tm + th);
+
+        // Check if both points are behind the ray
+        if (t1 > 0 && t2 > 0) {
+            Point p1 = ray.getPoint(t1);
+            Point p2 = ray.getPoint(t2);
+            return List.of(p1, p2);
+        }
+
+        // Check if only one point is in front of the ray
+        if (t1 > 0) {
+            Point p1 = ray.getPoint(t1);
+            return List.of(p1);
+        }
+
+        if (t2 > 0) {
+            Point p2 = ray.getPoint(t2);
+            return List.of(p2);
+        }
+
+        // Both points are behind the ray
         return null;
     }
 }
