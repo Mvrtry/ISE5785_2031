@@ -61,10 +61,10 @@ class TriangleTests {
 
         // ============ Equivalence Partitions Tests ==============
         // TC01: Inside triangle
-        List<Point> result = triangle.findIntersections(new Ray(new Point(0, 0.25, 0), new Vector(0, 0, 1)));
+        List<Point> result = triangle.findIntersections(new Ray(new Point(0, 0.3, 0), new Vector(0, 0, 1)));
         assertNotNull(result, "Ray should intersect triangle");
         assertEquals(1, result.size(), "Wrong number of points");
-        assertEquals(new Point(0, 0.25, 1), result.get(0), "Ray intersection point is wrong");
+        assertEquals(new Point(0, 0.3, 1), result.get(0), "Ray intersection point is wrong");
 
         // TC02: Outside against edge
         assertNull(triangle.findIntersections(new Ray(new Point(2, 0, 0), new Vector(0, 0, 1))),

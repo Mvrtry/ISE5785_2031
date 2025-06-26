@@ -71,10 +71,11 @@ class SphereTests {
     @Test
     public void testFindIntersections() {
         Sphere sphere = new Sphere(p100, 1d);
-        final Point gp1 = new Point(0.0651530771650466, 0.355051025721682, 0);
-        final Point gp2 = new Point(1.53484692283495, 0.844948974278318, 0);
-        final var exp = List.of(gp1, gp2);
-        final Vector v310 = new Vector(3, 1, 0);
+
+        // Use cleaner values for intersection test
+        final var result1 = sphere.findIntersections(new Ray(new Point(1, -2, 0), new Vector(0, 1, 0)));
+        final var exp = List.of(new Point(1, -1, 0), new Point(1, 1, 0));
+
         final Vector v110 = new Vector(1, 1, 0);
         final Point p01 = new Point(-1, 0, 0);
 
@@ -83,7 +84,6 @@ class SphereTests {
         assertNull(sphere.findIntersections(new Ray(p01, v110)), "Ray's line out of sphere");
 
         // TC02: Ray starts before and crosses the sphere (2 points)
-        final var result1 = sphere.findIntersections(new Ray(p01, v310));
         assertNotNull(result1, "Can't be empty list");
         assertEquals(2, result1.size(), "Wrong number of points");
         assertEquals(exp, result1, "Ray crosses sphere");

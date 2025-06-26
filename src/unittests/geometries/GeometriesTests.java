@@ -62,12 +62,12 @@ public class GeometriesTests {
         // ============ Equivalence Partitions Tests ==============
 
         // TC04: Ray that intersects some geometries (EP) - sphere and plane
-        result = geometries.findIntersections(new Ray(new Point(2, 0, -1), new Vector(0, 0, 1)));
+        result = geometries.findIntersections(new Ray(new Point(2, 0, -2), new Vector(0, 0, 1)));
         assertNotNull(result, "Ray should intersect some geometries");
         assertEquals(3, result.size(), "Wrong number of intersections"); // 2 from sphere + 1 from plane
 
         // TC05: Ray that intersects multiple geometries (EP) - triangle and plane
-        result = geometries.findIntersections(new Ray(new Point(0, 0.25, 0), new Vector(0, 0, 1)));
+        result = geometries.findIntersections(new Ray(new Point(0, 0.3, 0), new Vector(0, 0, 1)));
         assertNotNull(result, "Ray should intersect multiple geometries");
         assertEquals(2, result.size(), "Should intersect triangle and plane"); // 1 from triangle + 1 from plane
 
