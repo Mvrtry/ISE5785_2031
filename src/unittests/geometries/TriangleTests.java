@@ -57,32 +57,43 @@ class TriangleTests {
      */
     @Test
     void testFindIntersections() {
-        Triangle triangle = new Triangle(new Point(0, 0, 1), new Point(1, 0, 0), new Point(0, 1, 0));
+        Triangle triangle = new Triangle(new Point(1, 0, 1), new Point(0, 1, 1), new Point(-1, 0, 1));
 
         // ============ Equivalence Partitions Tests ==============
         // TC01: Inside triangle
-        List<Point> result = triangle.findIntersections(new Ray(new Point(0.25, 0.25, -1), new Vector(0, 0, 1)));
+        List<Point> result = triangle.findIntersections(new Ray(new Point(0, 0.25, 0), new Vector(0, 0, 1)));
+        assertNotNull(result, "Ray should intersect triangle");
         assertEquals(1, result.size(), "Wrong number of points");
+        assertEquals(new Point(0, 0.25, 1), result.get(0), "Ray intersection point is wrong");
 
         // TC02: Outside against edge
-        assertNull(triangle.findIntersections(new Ray(new Point(0, 0.5, -1), new Vector(0, 0, 1))),
+        assertNull(triangle.findIntersections(new Ray(new Point(2, 0, 0), new Vector(0, 0, 1))),
                 "Ray's line outside against edge");
 
         // TC03: Outside against vertex
-        assertNull(triangle.findIntersections(new Ray(new Point(-0.5, -0.5, -1), new Vector(0, 0, 1))),
+        assertNull(triangle.findIntersections(new Ray(new Point(2, 2, 0), new Vector(0, 0, 1))),
                 "Ray's line outside against vertex");
 
         // =============== Boundary Values Tests ==================
         // TC11: On edge
-        assertNull(triangle.findIntersections(new Ray(new Point(0.5, 0, -1), new Vector(0, 0, 1))),
+        assertNull(triangle.findIntersections(new Ray(new Point(0.5, 0.5, 0), new Vector(0, 0, 1))),
                 "Ray's line on edge");
 
         // TC12: In vertex
-        assertNull(triangle.findIntersections(new Ray(new Point(1, 0, -1), new Vector(0, 0, 1))),
+        assertNull(triangle.findIntersections(new Ray(new Point(1, 0, 0), new Vector(0, 0, 1))),
                 "Ray's line in vertex");
 
         // TC13: On edge's continuation
-        assertNull(triangle.findIntersections(new Ray(new Point(2, -1, -1), new Vector(0, 0, 1))),
+        assertNull(triangle.findIntersections(new Ray(new Point(2, -1, 0), new Vector(0, 0, 1))),
                 "Ray's line on edge's continuation");
+
+        // Additional boundary tests
+        // TC14: Ray parallel to triangle
+        assertNull(triangle.findIntersections(new Ray(new Point(1, 1, 2), new Vector(1, 0, 0))),
+                "Ray parallel to triangle");
+
+        // TC15: Ray starts at triangle plane but outside triangle
+        assertNull(triangle.findIntersections(new Ray(new Point(3, 3, 1), new Vector(1, 0, 0))),
+                "Ray starts at triangle plane but outside");
     }
 }
