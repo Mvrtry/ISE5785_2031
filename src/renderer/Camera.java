@@ -1,6 +1,7 @@
 package renderer;
 
 import primitives.*;
+import scene.Scene;
 
 import java.util.MissingResourceException;
 
@@ -39,6 +40,26 @@ public class Camera implements Cloneable {
      * The distance from the camera to the view plane
      */
     private double distance;
+
+    /**
+     * Image writer for generating output images
+     */
+    private ImageWriter imageWriter;
+
+    /**
+     * Ray tracer for calculating pixel colors
+     */
+    private RayTracerBase rayTracer;
+
+    /**
+     * Horizontal resolution (number of pixels in width)
+     */
+    private int nX = 1;
+
+    /**
+     * Vertical resolution (number of pixels in height)
+     */
+    private int nY = 1;
 
     /**
      * Private constructor for Camera
@@ -93,6 +114,94 @@ public class Camera implements Cloneable {
         Vector vIJ = pIJ.subtract(location);
 
         return new Ray(location, vIJ);
+    }
+
+    /**
+     * Renders the entire image by casting rays through each pixel
+     *
+     * @return this Camera object for method chaining
+     * @throws UnsupportedOperationException if imageWriter or rayTracer are not set
+     */
+    public Camera renderImage() {
+        if (imageWriter == null) {
+            throw new UnsupportedOperationException("ImageWriter is not set");
+        }
+        if (rayTracer == null) {
+            throw new UnsupportedOperationException("RayTracer is not set");
+        }
+
+        // Loop through all pixels in the view plane
+        for (int i = 0; i < nY; i++) {
+            for (int j = 0; j < nX; j++) {
+                castRay(j, i);
+            }
+        }
+
+        return this;
+    }
+
+    /**
+     * Casts a ray through a specific pixel and colors it
+     *
+     * @param j pixel column index (X direction)
+     * @param i pixel row index (Y direction)
+     */
+    private void castRay(int j, int i) {
+        // Construct ray through pixel center
+        Ray ray = constructRay(nX, nY, j, i);
+
+        // Trace the ray to get its color
+        Color pixelColor = rayTracer.traceRay(ray);
+
+        // Color the pixel
+        imageWriter.writePixel(j, i, pixelColor);
+    }
+
+    /**
+     * Prints a grid over the rendered image
+     *
+     * @param interval the interval between grid lines (in pixels)
+     * @param color    the color of the grid lines
+     * @return this Camera object for method chaining
+     * @throws UnsupportedOperationException if imageWriter is not set
+     */
+    public Camera printGrid(int interval, Color color) {
+        if (imageWriter == null) {
+            throw new UnsupportedOperationException("ImageWriter is not set");
+        }
+
+        // Draw vertical grid lines
+        for (int j = 0; j < nX; j += interval) {
+            for (int i = 0; i < nY; i++) {
+                imageWriter.writePixel(j, i, color);
+            }
+        }
+
+        // Draw horizontal grid lines
+        for (int i = 0; i < nY; i += interval) {
+            for (int j = 0; j < nX; j++) {
+                imageWriter.writePixel(j, i, color);
+            }
+        }
+
+        return this;
+    }
+
+    /**
+     * Writes the rendered image to a file
+     * Delegates to ImageWriter's writeToImage method
+     *
+     * @param imageName the name of the image file (without extension)
+     * @return this Camera object for method chaining
+     * @throws UnsupportedOperationException if imageWriter is not set
+     */
+    public Camera writeToImage(String imageName) {
+        if (imageWriter == null) {
+            throw new UnsupportedOperationException("ImageWriter is not set");
+        }
+
+        imageWriter.writeToImage(imageName);
+        return this;
     }
 
     @Override
@@ -235,7 +344,7 @@ public class Camera implements Cloneable {
         }
 
         /**
-         * Set image resolution (placeholder for now)
+         * Set image resolution
          *
          * @param nX horizontal resolution
          * @param nY vertical resolution
@@ -244,6 +353,27 @@ public class Camera implements Cloneable {
         public Builder setResolution(int nX, int nY) {
             if (nX <= 0 || nY <= 0) {
                 throw new IllegalArgumentException("Resolution must be positive");
+            }
+            camera.nX = nX;
+            camera.nY = nY;
+            return this;
+        }
+
+        /**
+         * Set ray tracer for the camera
+         *
+         * @param scene         the scene to render
+         * @param rayTracerType the type of ray tracer to use
+         * @return this builder
+         */
+        public Builder setRayTracer(Scene scene, RayTracerType rayTracerType) {
+            switch (rayTracerType) {
+                case SIMPLE:
+                    camera.rayTracer = new SimpleRayTracer(scene);
+                    break;
+                default:
+                    camera.rayTracer = null;
+                    break;
             }
             return this;
         }
@@ -286,6 +416,17 @@ public class Camera implements Cloneable {
                 camera.vRight = camera.vTo.crossProduct(camera.vUp).normalize();
             }
 
+            // Check if resolution values are positive and create ImageWriter
+            if (camera.nX <= 0 || camera.nY <= 0) {
+                throw new IllegalArgumentException("Resolution values must be positive");
+            }
+            camera.imageWriter = new ImageWriter(camera.nX, camera.nY);
+
+            // If rayTracer is not set, create SimpleRayTracer with empty scene
+            if (camera.rayTracer == null) {
+                camera.rayTracer = new SimpleRayTracer(new Scene("Empty Scene"));
+            }
+
             try {
                 return camera.clone();
             } catch (CloneNotSupportedException e) {
@@ -293,6 +434,4 @@ public class Camera implements Cloneable {
             }
         }
     }
-
-
 }

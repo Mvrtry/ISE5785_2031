@@ -1,6 +1,9 @@
 package unittests.geometries;
 
-import geometries.*;
+import geometries.Geometries;
+import geometries.Plane;
+import geometries.Sphere;
+import geometries.Triangle;
 import org.junit.jupiter.api.Test;
 import primitives.Point;
 import primitives.Ray;
@@ -11,7 +14,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Unit tests for {@link geometries.Geometries} class
+ * Unit tests for {@link Geometries} class
  * Tests the findIntersections method with various scenarios including
  * boundary value analysis (BVA) and equivalence partitioning (EP)
  *
@@ -26,7 +29,7 @@ public class GeometriesTests {
     }
 
     /**
-     * Test method for {@link geometries.Geometries#findIntersections(primitives.Ray)}
+     * Test method for {@link Geometries#findIntersections(Ray)}
      * Tests various intersection scenarios:
      * - Empty collection (BVA)
      * - No intersections (BVA)

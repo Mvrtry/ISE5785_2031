@@ -4,7 +4,8 @@ import org.junit.jupiter.api.Test;
 import primitives.Point;
 import primitives.Vector;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Unit tests for primitives.Point class

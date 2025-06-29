@@ -5,7 +5,10 @@ import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * Unit tests for primitives.Ray class
@@ -52,5 +55,47 @@ public class RayTests {
         // TC14: Large positive distance
         Point p6 = ray.getPoint(10);
         assertEquals(new Point(1, 12, 3), p6, "Wrong point for large positive distance");
+    }
+
+    /**
+     * Test method for {@link Ray#findClosestPoint(List)}.
+     */
+    @Test
+    void testFindClosestPoint() {
+        Ray ray = new Ray(new Point(0, 0, 0), new Vector(1, 0, 0));
+
+        // =============== Boundary Values Tests ==================
+
+        // TC11: Empty list (null) - should return null
+        assertNull(ray.findClosestPoint(null), "Empty list should return null");
+
+        // TC12: First point is the closest to ray's starting point
+        List<Point> pointsFirstClosest = List.of(
+                new Point(1, 0, 0),    // Distance: 1 (closest)
+                new Point(3, 0, 0),    // Distance: 3
+                new Point(5, 0, 0)     // Distance: 5
+        );
+        assertEquals(new Point(1, 0, 0), ray.findClosestPoint(pointsFirstClosest),
+                "First point should be the closest");
+
+        // TC13: Last point is the closest to ray's starting point
+        List<Point> pointsLastClosest = List.of(
+                new Point(5, 0, 0),    // Distance: 5
+                new Point(3, 0, 0),    // Distance: 3
+                new Point(1, 0, 0)     // Distance: 1 (closest)
+        );
+        assertEquals(new Point(1, 0, 0), ray.findClosestPoint(pointsLastClosest),
+                "Last point should be the closest");
+
+        // ============ Equivalence Partitions Tests ==============
+
+        // TC01: Middle point is the closest to ray's starting point
+        List<Point> pointsMiddleClosest = List.of(
+                new Point(5, 0, 0),    // Distance: 5
+                new Point(1, 0, 0),    // Distance: 1 (closest)
+                new Point(3, 0, 0)     // Distance: 3
+        );
+        assertEquals(new Point(1, 0, 0), ray.findClosestPoint(pointsMiddleClosest),
+                "Middle point should be the closest");
     }
 }

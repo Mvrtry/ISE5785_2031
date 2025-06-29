@@ -1,8 +1,13 @@
 package unittests.renderer;
 
-import geometries.*;
+import geometries.Intersectable;
+import geometries.Plane;
+import geometries.Sphere;
+import geometries.Triangle;
 import org.junit.jupiter.api.Test;
-import primitives.*;
+import primitives.Point;
+import primitives.Ray;
+import primitives.Vector;
 import renderer.Camera;
 
 import java.util.List;
@@ -20,13 +25,12 @@ public class CameraIntersectionsIntegrationTests {
     /**
      * default contractor
      */
-    public CameraIntersectionsIntegrationTests() {
-    }
+    public CameraIntersectionsIntegrationTests() {}
 
     /**
      * Helper method to count intersections of all rays from camera with a geometry
      *
-     * @param camera   the camera
+     * @param camera the camera
      * @param geometry the geometry to test intersections with
      * @return total number of intersection points
      */
